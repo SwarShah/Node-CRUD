@@ -42,6 +42,23 @@ app.post('/', function(req, res) {
 	});
 });
 
+app.put('/id/:id', function(req, res){
+	var sql = 'UPDATE contact set first = ?, last = ?, extension = ?, id = ?, imageUrl = ?, office = ?, department = ?, manager = ? where id = ?';
+	var inserts = [req.body.first, req.body.last, req.body.extension, req.body.id, req.body.imageUrl,
+		req.body.office, req.body.department, req.body.manager, req.params.id];
+	var q = mysql.format(sql, inserts);
+	var connection = connect();
+	connection.query(q, function(err, result){
+		if(err){
+			throw err;
+			connection.end();
+		}
+		else{
+			res.send();
+		}
+	});
+});
+
 app.delete('/id/:id', function(req, res) {
 	var sql = 'DELETE FROM contact where id = ?';
 	var inserts = [req.params.id];
