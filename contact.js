@@ -2,8 +2,9 @@ var express = require('express');
 var path = require('path');
 var mysql = require('mysql');
 var app = express();
+app.use(express.bodyParser());
 
-function connect () {
+function connect() {
   var conn = mysql.createConnection({
 	host : '174.79.32.158',
 	user : 'c647456',
