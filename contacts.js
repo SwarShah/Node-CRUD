@@ -20,7 +20,11 @@ app.get('/id/:id', function(req, res){
 	var q = mysql.format(sql, inserts);
 	var connection = connect();
 	connection.query(q, function(err, rows){
-		res.send(rows[0]);
+		if(rows.length < 1){
+			res.status(404).send('Not found');
+		}
+		else
+			res.send(rows[0]);
 		connection.end();
 	});
 });
