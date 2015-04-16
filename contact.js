@@ -25,6 +25,26 @@ app.get('/id/:id', function(req, res){
 	});
 });
 
+app.post('/', function(req, res) {
+	var sql = 'INSERT INTO contact values(?, ?, ?, ?, ?, ?, ?, ?)';
+	var inserts = [req.body.first, req.body.last, req.body.extension, req.body.id, req.body.imageUrl,
+		req.body.office, req.body.department, req.body.manager];
+	var q = mysql.format(sql, inserts);
+	var connection = connect();
+	connection.query(q, function(err, result){
+		if(err){
+			throw err;
+			connection.end();
+		}
+		else{
+			res.send();
+		}
+	});
+});
+
+
+
+
 var server = app.listen(8001, function(err){
 	console.log('Listening on port 8001');
 });
