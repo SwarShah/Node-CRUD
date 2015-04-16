@@ -42,7 +42,21 @@ app.post('/', function(req, res) {
 	});
 });
 
-
+app.delete('/id/:id', function(req, res) {
+	var sql = 'DELETE FROM contact where id = ?';
+	var inserts = [req.params.id];
+	var q = mysql.format(sql, inserts);
+	var connection = connect();
+	connection.query(q, function(err, result){
+		if(err){
+			throw err;
+			connection.end();
+		}
+		else{
+			res.send();
+		}
+	});
+});
 
 
 var server = app.listen(8001, function(err){
